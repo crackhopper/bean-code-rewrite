@@ -25,11 +25,14 @@ def readBeanData(fname):
     arr = arr.transpose(0,2,1)
     return arr
 
-def makeRGB(rawArr):
+def makeRGB(rawArr, scale=True):
     res=[]
     for c in chs:
-        scaler = MinMaxScaler()
-        transed = scaler.fit_transform(rawArr[:,:,c])
+        if scale:
+            scaler = MinMaxScaler()
+            transed = scaler.fit_transform(rawArr[:,:,c])
+        else:
+            transed = rawArr[:,:,c]
         res.append(transed)
     return np.stack(res).transpose(1,2,0)
 

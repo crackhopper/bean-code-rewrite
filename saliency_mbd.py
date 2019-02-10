@@ -108,22 +108,7 @@ def mbd(img, num_iters):
 	return np.array(D_list)
 
 
-def get_saliency_mbd(input,method='b'):
-
-	img_path_list = []
-	#we get either a filename or a list of filenames
-	if type(input) == type(str()):
-		img_path_list.append(input)
-	elif type(input) == type(list()):
-		img_path_list = input
-	else:
-		print('Input type is neither list or string')
-		return None
-
-	# Saliency map calculation based on: Minimum Barrier Salient Object Detection at 80 FPS
-	for img_path in img_path_list:
-
-		img = skimage.io.imread(img_path)
+def get_saliency_mbd(img,method='b'):
 		img_mean = np.mean(img,axis=(2))
 		sal = mbd(img_mean,3)
 
